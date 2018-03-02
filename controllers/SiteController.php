@@ -9,9 +9,14 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use linslin\yii2\curl;
 
 class SiteController extends Controller
 {
+
+
+    public $message = '';
+
     /**
      * {@inheritdoc}
      */
@@ -124,5 +129,28 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * Displays Send Application page. =]
+     *
+     * @return string
+     */
+    public function actionSendApplication()
+    {
+        $url = "http://163.172.182.207:8080/cv";      
+        //Init curl
+        $curl = new curl\Curl();
+ 
+        $response = $curl->setOption(
+                CURLOPT_POSTFIELDS, 
+                http_build_query(array(
+                    'github_url' => 'https://github.com/rodoflho/jobtest1',
+                    'cv_url' => 'https://drive.google.com/file/d/1kS8zUNhyj6mVe16LerZB6XeMQ4RIZAK2/view',
+                )
+            ))
+            ->post($url);
+        $message = $response;
+        return $this->render('send-application', ['message' => $message]);
     }
 }

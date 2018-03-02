@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name'=>'Rodolpho Timóteo',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -42,7 +43,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => $db
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
